@@ -11,6 +11,8 @@ export const useSearchProduct = () => {
       .then((res) => res.json())
       .then((data) => {
         setProducts(data.products);
+
+        return data.products;
       });
   };
 

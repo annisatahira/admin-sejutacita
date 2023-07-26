@@ -52,6 +52,7 @@ const ProductTable = () => {
       data={products}
       showSearchBar={true}
       fetchSearch={searchProduct}
+      searchBy={"title"}
       fetchAll={fetchProducts}
       filters={
         <>
@@ -59,6 +60,7 @@ const ProductTable = () => {
             id="react-select-brand"
             title="Brand"
             options={allData}
+            dataTable={products}
             setDataTable={setProducts}
             filterBy="brand"
           />
@@ -66,15 +68,9 @@ const ProductTable = () => {
             id="react-select-category"
             title="Category"
             options={allData}
+            dataTable={products}
             setDataTable={setProducts}
             filterBy="category"
-          />
-          <Select
-            id="react-select-name"
-            title="Name"
-            options={allData}
-            setDataTable={setProducts}
-            filterBy="title"
           />
         </>
       }

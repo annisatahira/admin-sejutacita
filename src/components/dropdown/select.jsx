@@ -3,12 +3,18 @@ import { default as ReactSelect } from "react-select";
 import Option from "./options";
 import { filterArrByObj, getKeyData, objToArray } from "@/utils";
 
+// dataTable --> data yg berubah hasil search dan filter
+// options ---> keseluruhan data awal
+
 const Select = (props) => {
-  const { id, title, setDataTable, options, filterBy } = props;
+  const { id, title, dataTable, setDataTable, options, filterBy } = props;
   const [optionSelected, setOptionSelected] = useState(null);
   const [optionData, setOptionData] = useState([]);
 
+  console.log({ optionSelected });
+
   const handleChange = (selected) => {
+    console.log({ options });
     setOptionSelected(selected);
 
     // get selected filter
@@ -21,7 +27,7 @@ const Select = (props) => {
   };
 
   const getFillteredKey = (selected) => {
-    const allFilter = sessionStorage.getItem("filter");
+    const allFilter = sessionStorage.getItem("product-filter");
 
     if (allFilter && allFilter !== null && allFilter !== "") {
       const objFilter = JSON.parse(allFilter);
@@ -32,14 +38,16 @@ const Select = (props) => {
         objFilter[filterBy] = selected?.label;
       }
 
-      sessionStorage.setItem("filter", JSON.stringify(objFilter));
+      sessionStorage.setItem("product-filter", JSON.stringify(objFilter));
+
+      console.log({ objFilter });
 
       return objFilter;
     } else {
       const savedFilter = {};
 
       savedFilter[filterBy] = selected?.label;
-      sessionStorage.setItem("filter", JSON.stringify(savedFilter));
+      sessionStorage.setItem("product-filter", JSON.stringify(savedFilter));
 
       return savedFilter;
     }
@@ -52,6 +60,11 @@ const Select = (props) => {
       setOptionData(data);
     }
   }, [options]);
+
+  useEffect(() => {
+    const allFilter = sessionStorage.getItem("product-filter");
+    console.log({ options, allFilter });
+  }, []);
 
   return (
     <div>

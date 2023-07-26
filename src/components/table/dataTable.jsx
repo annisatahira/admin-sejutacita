@@ -14,6 +14,7 @@ const DataTable = (props) => {
     data,
     showSearchBar = false,
     fetchSearch,
+    searchBy,
     fetchAll,
     id,
     filters,
@@ -31,7 +32,12 @@ const DataTable = (props) => {
       {showSearchBar && (
         <div className="w-1/3 relative mx-1">
           <h1 className="mb-3">Search Product</h1>
-          <SearchBar id={id} fetchAll={fetchAll} fetchSearch={fetchSearch} />
+          <SearchBar
+            id={id}
+            fetchAll={fetchAll}
+            fetchSearch={fetchSearch}
+            searchBy={searchBy}
+          />
         </div>
       )}
       <div className="mb-4 mx-1">

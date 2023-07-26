@@ -1,31 +1,34 @@
 import { useEffect, useState } from "react";
 
 const SearchBar = (props) => {
-  const { id, fetchAll, fetchSearch } = props;
+  const { id, fetchAll, fetchSearch, searchBy } = props;
   const [inputText, setInputText] = useState(null);
 
   const handleSearch = (e) => {
     e.preventDefault();
 
     // autosaved
-    sessionStorage.setItem(`${id}-search`, inputText);
+    const data = { title: inputText };
+    sessionStorage.setItem(`${id}-filter`, JSON.stringify(data));
     // fetch data by given key
     fetchSearch(inputText);
   };
 
   useEffect(() => {
-    const key = sessionStorage.getItem(`${id}-search`);
+    const key = JSON.parse(sessionStorage.getItem(`${id}-filter`));
+
     if (key) {
-      setInputText(key);
-      fetchSearch(key);
+      setInputText(key[searchBy]);
+      fetchSearch(key[searchBy]);
     }
   }, []);
 
   useEffect(() => {
     if (inputText == "") {
       fetchAll();
+      const data = { title: inputText };
       // autosaved
-      sessionStorage.setItem(`${id}-search`, inputText);
+      sessionStorage.setItem(`${id}-filter`, JSON.stringify(data));
     }
   }, [inputText]);
 
