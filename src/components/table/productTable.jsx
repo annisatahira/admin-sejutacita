@@ -3,7 +3,7 @@ import DataTable from "@/components/table/dataTable";
 import { useProducts } from "@/data/products/useProducts";
 import { useSearchProduct } from "@/data/products/useSearchProduct";
 import Select from "../dropdown/select";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import ProductContext from "@/context/productContext";
 
 const ProductTable = () => {
@@ -40,10 +40,18 @@ const ProductTable = () => {
     },
   ];
 
-  const { allData, fetchProducts } = useProducts();
+  const { allData, fetchProducts, fetchData } = useProducts();
   const [products, setProducts] = useContext(ProductContext);
+  const [filters, setFilters] = useState({});
 
   const { searchProduct } = useSearchProduct();
+
+  useEffect(() => {
+    const allFilter = sessionStorage.getItem("product-filter");
+    const objFilter = JSON.parse(allFilter);
+
+    setFilters(objFilter);
+  }, []);
 
   return (
     <DataTable
@@ -53,7 +61,7 @@ const ProductTable = () => {
       showSearchBar={true}
       fetchSearch={searchProduct}
       searchBy={"title"}
-      fetchAll={fetchProducts}
+      fetchAll={fetchData}
       filters={
         <>
           <Select
@@ -63,6 +71,7 @@ const ProductTable = () => {
             dataTable={products}
             setDataTable={setProducts}
             filterBy="brand"
+            initialValue={{ label: filters?.brand }}
           />
           <Select
             id="react-select-category"
@@ -71,6 +80,7 @@ const ProductTable = () => {
             dataTable={products}
             setDataTable={setProducts}
             filterBy="category"
+            initialValue={{ label: filters?.category }}
           />
         </>
       }

@@ -7,14 +7,19 @@ import { filterArrByObj, getKeyData, objToArray } from "@/utils";
 // options ---> keseluruhan data awal
 
 const Select = (props) => {
-  const { id, title, dataTable, setDataTable, options, filterBy } = props;
+  const {
+    id,
+    title,
+    dataTable,
+    setDataTable,
+    options,
+    filterBy,
+    initialValue,
+  } = props;
   const [optionSelected, setOptionSelected] = useState(null);
   const [optionData, setOptionData] = useState([]);
 
-  console.log({ optionSelected });
-
   const handleChange = (selected) => {
-    console.log({ options });
     setOptionSelected(selected);
 
     // get selected filter
@@ -40,8 +45,6 @@ const Select = (props) => {
 
       sessionStorage.setItem("product-filter", JSON.stringify(objFilter));
 
-      console.log({ objFilter });
-
       return objFilter;
     } else {
       const savedFilter = {};
@@ -59,12 +62,13 @@ const Select = (props) => {
       const data = objToArray(objProducts);
       setOptionData(data);
     }
+
+    if (initialValue?.label) {
+      setOptionSelected(initialValue);
+    }
   }, [options]);
 
-  useEffect(() => {
-    const allFilter = sessionStorage.getItem("product-filter");
-    console.log({ options, allFilter });
-  }, []);
+  console.log({ initialValue });
 
   return (
     <div>
@@ -73,7 +77,7 @@ const Select = (props) => {
         id={id}
         instanceId={id}
         options={optionData}
-        closeMenuOnSelect={false}
+        closeMenuOnSelect={true}
         isClearable={true}
         hideSelectedOptions={false}
         components={{

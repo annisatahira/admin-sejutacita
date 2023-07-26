@@ -2,14 +2,12 @@
 
 import ProductContext from "@/context/productContext";
 import { useContext, useEffect, useState } from "react";
-import { useSearchProduct } from "./useSearchProduct";
 import { filterArrByObj } from "@/utils";
 
 export const useProducts = () => {
   const [allData, setAllData] = useState([]);
 
   const [products, setProducts] = useContext(ProductContext);
-  const { searchProduct } = useSearchProduct();
 
   const fetchProducts = async () => {
     return fetch("https://dummyjson.com/products")
@@ -22,18 +20,23 @@ export const useProducts = () => {
       });
   };
 
-  useEffect(() => {
+  const fetchData = () => {
     const filters = JSON.parse(sessionStorage.getItem("product-filter"));
 
     if (filters && Object.keys(filters).length !== 0) {
       fetchProducts().then((data) => {
         const filteredProduct = filterArrByObj(data, filters);
+
         setProducts(filteredProduct);
       });
     } else {
       fetchProducts();
     }
+  };
+
+  useEffect(() => {
+    fetchData();
   }, []);
 
-  return { products, allData, fetchProducts };
+  return { products, allData, fetchProducts, fetchData };
 };

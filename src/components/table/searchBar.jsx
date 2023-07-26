@@ -25,10 +25,14 @@ const SearchBar = (props) => {
 
   useEffect(() => {
     if (inputText == "") {
-      fetchAll();
-      const data = { title: inputText };
       // autosaved
-      sessionStorage.setItem(`${id}-filter`, JSON.stringify(data));
+      const filter = sessionStorage.getItem(`${id}-filter`);
+      const objFilter = JSON.parse(filter);
+
+      delete objFilter[searchBy];
+      sessionStorage.setItem(`${id}-filter`, JSON.stringify(objFilter));
+
+      fetchAll();
     }
   }, [inputText]);
 
