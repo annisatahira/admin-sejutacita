@@ -43,8 +43,6 @@ const ProductTable = () => {
   const { allData, fetchProducts } = useProducts();
   const [products, setProducts] = useContext(ProductContext);
 
-  console.log({ allData });
-
   const { searchProduct } = useSearchProduct();
 
   return (
