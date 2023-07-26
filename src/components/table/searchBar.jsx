@@ -17,7 +17,7 @@ const SearchBar = (props) => {
   useEffect(() => {
     const key = JSON.parse(sessionStorage.getItem(`${id}-filter`));
 
-    if (key) {
+    if (key && key[searchBy] !== "") {
       setInputText(key[searchBy]);
       fetchSearch(key[searchBy]);
     }
