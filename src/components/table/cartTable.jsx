@@ -34,6 +34,7 @@ export const CartTable = () => {
       columns={CartColumns}
       data={carts}
       fetchAll={fetchCarts}
+      showAction={true}
     />
   );
 };

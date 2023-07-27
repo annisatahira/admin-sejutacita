@@ -23,11 +23,10 @@ const MENU_DASHBOARD = [
 const Menu = () => {
   const pathname = usePathname();
 
-  console.log({ pathname });
   return (
     <>
       <h1 className="font-bold mb-4 text-3xl text-blue-600">SejutaCita</h1>
-      <hr class="h-px my-8 bg-blue-200 border-0"></hr>
+      <hr className="h-px my-8 bg-blue-200 border-0"></hr>
       <nav className=" text-gray-400 cursor-pointer mt-10">
         <ul className="list-none leading-10 w-full">
           {MENU_DASHBOARD.map((menu) => {

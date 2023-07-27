@@ -7,6 +7,8 @@ import {
   getPaginationRowModel,
 } from "@tanstack/react-table";
 import SearchBar from "../search";
+import { AiFillEye } from "react-icons/ai";
+import Link from "next/link";
 
 const DataTable = (props) => {
   const {
@@ -19,6 +21,7 @@ const DataTable = (props) => {
     fetchAll,
     id,
     filters,
+    showAction = false,
   } = props;
 
   const table = useReactTable({
@@ -62,13 +65,14 @@ const DataTable = (props) => {
                         )}
                       </th>
                     ))}
+                    {showAction && <th>Action</th>}
                   </tr>
                 ))}
               </thead>
-              <tbody className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <tbody className="bg-white border-b">
                 {table.getRowModel().rows.map((row) => (
                   <tr
-                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                    className="bg-white border-b hover:bg-blue-50"
                     key={row.id}
                   >
                     {row.getVisibleCells().map((cell) => (
@@ -79,6 +83,17 @@ const DataTable = (props) => {
                         )}
                       </td>
                     ))}
+                    {showAction && (
+                      <td className="px-6 py-4">
+                        <Link
+                          href={`/dashboard/carts/${row.original.id}`}
+                          className="flex gap-2 font-medium hover:text-blue-600 hover:font-bold"
+                        >
+                          <AiFillEye className="text-xl" />
+                          <span>Detail</span>
+                        </Link>
+                      </td>
+                    )}
                   </tr>
                 ))}
               </tbody>
@@ -112,15 +127,5 @@ const DataTable = (props) => {
     </div>
   );
 };
-
-// function Filter({ column, table }) {
-//   const firstValue = table
-//     .getPreFilteredRowModel()
-//     .flatRows[0]?.getValue(column.id);
-
-//   const columnFilterValue = column.getFilterValue();
-
-//   console.log({ firstValue, columnFilterValue });
-// }
 
 export default DataTable;

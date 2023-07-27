@@ -17,6 +17,9 @@ export const useProducts = () => {
         setAllData(data.products);
 
         return data.products;
+      })
+      .catch((err) => {
+        return err;
       });
   };
 

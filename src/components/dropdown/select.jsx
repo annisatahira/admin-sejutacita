@@ -68,8 +68,6 @@ const Select = (props) => {
     }
   }, [options]);
 
-  console.log({ initialValue });
-
   return (
     <div>
       <h1 className="mb-2">By {title}</h1>
