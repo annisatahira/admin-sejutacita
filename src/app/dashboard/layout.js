@@ -1,18 +1,12 @@
-export default function DashboardLayout({
-  children, // will be a page or nested layout
-}) {
+import Menu from "@/components/menu";
+
+export default function DashboardLayout({ children }) {
   return (
     <div className="container flex flex-row min-h-screen">
-      <section className="basis-1/4 p-4 bg-blue-600">
-        <h1 className="mb-4 text-3xl text-white">SejutaCita</h1>
-        <nav className="text-white cursor-pointer mt-10">
-          <ul className="list-none leading-10">
-            <li>Products</li>
-            <li>Carts</li>
-          </ul>
-        </nav>
+      <section className="basis-1/6 p-4 bg-white shadow-lg">
+        <Menu />
       </section>
-      <section className="basis-3/4 p-6">{children}</section>
+      <section className="basis-5/6 p-6">{children}</section>
     </div>
   );
 }
