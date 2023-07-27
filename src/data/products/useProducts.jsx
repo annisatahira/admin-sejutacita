@@ -14,8 +14,8 @@ export const useProducts = () => {
     return fetch("https://dummyjson.com/products")
       .then((res) => res.json())
       .then((data) => {
-        setProducts(data.products);
-        setAllData(data.products);
+        setProducts(data?.products);
+        setAllData(data?.products);
         setLoading(false);
 
         return data.products;
@@ -43,8 +43,6 @@ export const useProducts = () => {
   useEffect(() => {
     fetchData();
   }, []);
-
-  console.log({ products });
 
   return { loading, products, allData, fetchProducts, fetchData };
 };

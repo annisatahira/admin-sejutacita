@@ -7,6 +7,7 @@ export const useSearchProduct = () => {
   const [products, setProducts] = useContext(ProductContext);
 
   const searchProduct = (key) => {
+    key ? key : (key = "");
     fetch(`https://dummyjson.com/products/search?q=${key}`)
       .then((res) => res.json())
       .then((data) => {
