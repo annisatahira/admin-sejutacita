@@ -40,7 +40,7 @@ export const ProductTable = () => {
     },
   ];
 
-  const { allData, fetchProducts, fetchData } = useProducts();
+  const { allData, fetchData } = useProducts();
   const [products, setProducts] = useContext(ProductContext);
   const [filters, setFilters] = useState({});
 

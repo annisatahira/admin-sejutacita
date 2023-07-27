@@ -1,4 +1,5 @@
 import Menu from "@/components/menu";
+import { PiHandWavingDuotone } from "react-icons/pi";
 
 export default function DashboardLayout({ children }) {
   return (
@@ -7,8 +8,9 @@ export default function DashboardLayout({ children }) {
         <Menu />
       </section>
       <main className="basis-5/6">
-        <div className="w-full bg-gray-800 p-6 shadow-lg">
-          <h1 className="text-xl font-bold text-white">Welcome Back, Admin!</h1>
+        <div className="w-full bg-gray-800 p-6 shadow-lg flex text-xl font-bold text-white items-center gap-3">
+          <PiHandWavingDuotone className="text-4xl" />
+          <h1>Welcome Back, Admin!</h1>
         </div>
         <div className="p-6">{children}</div>
       </main>

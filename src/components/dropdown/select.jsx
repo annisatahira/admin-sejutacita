@@ -70,7 +70,7 @@ const Select = (props) => {
 
   return (
     <div>
-      <h1 className="mb-2">By {title}</h1>
+      <h1 className="mb-2 font-medium">By {title}</h1>
       <ReactSelect
         id={id}
         instanceId={id}

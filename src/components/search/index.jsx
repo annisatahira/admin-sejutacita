@@ -65,7 +65,7 @@ const SearchBar = (props) => {
         <input
           type="search"
           id="default-search"
-          className="block w-full p-4 pl-10 text-sm text-gray-900 border border-2 border-gray-300 rounded-full bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none"
+          className="block w-full p-4 pl-10 text-sm text-gray-900 shadow-md border-2 border-gray-300 rounded-full bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none"
           placeholder="Product Name"
           value={inputText || ""}
           onChange={(e) => setInputText(e.target.value)}

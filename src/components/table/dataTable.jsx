@@ -8,6 +8,7 @@ import {
 } from "@tanstack/react-table";
 import SearchBar from "../search";
 import { AiFillEye } from "react-icons/ai";
+import { BiFilter } from "react-icons/bi";
 import Link from "next/link";
 
 const DataTable = (props) => {
@@ -35,7 +36,6 @@ const DataTable = (props) => {
     <div className="relative overflow-x-auto">
       {showSearchBar && (
         <div className="w-1/3 relative mx-1">
-          <h1 className="mb-3">Search Product</h1>
           <SearchBar
             id={id}
             fetchAll={fetchAll}
@@ -45,15 +45,19 @@ const DataTable = (props) => {
         </div>
       )}
       {showFilter && (
-        <div className="mb-4 mx-1">
-          <h1 className="mb-3">Filter</h1>
+        <div className="mb-4 mx-1 bg-white p-3 rounded-lg shadow-md">
+          <div className="flex gap-3">
+            <BiFilter className="text-3xl" />
+            <h1 className="text-xl font-bold">Filter</h1>
+          </div>
+          <hr className="my-3" />
           <div className="grid grid-cols-4 gap-3">{filters}</div>
         </div>
       )}
       <div className="shadow-lg m-1 rounded-md">
         <div>
           {data?.length > 0 ? (
-            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 shadow-lg rounded-lg">
               <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 {table.getHeaderGroups().map((headerGroup) => (
                   <tr key={headerGroup.id}>
