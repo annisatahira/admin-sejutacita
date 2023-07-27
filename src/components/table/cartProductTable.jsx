@@ -2,6 +2,7 @@
 import DataTable from "@/components/table/dataTable";
 import { useCartProducts } from "@/data/carts/useCartProducts";
 import { useCarts } from "@/data/carts/useCarts";
+import { useParams } from "next/navigation";
 import { useEffect } from "react";
 
 export const CartProductTable = () => {
@@ -28,13 +29,13 @@ export const CartProductTable = () => {
     },
   ];
 
+  const param = useParams();
+
   const { cartProducts, fetchCartProducts } = useCartProducts();
 
   useEffect(() => {
-    fetchCartProducts(1);
+    fetchCartProducts(param.id);
   }, []);
-
-  console.log({ hhhh: cartProducts });
 
   return (
     <DataTable

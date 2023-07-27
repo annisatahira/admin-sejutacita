@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 export const useCartProducts = () => {
-  const [cartProducts, setCartProducts] = useState([]);
+  const [cartProducts, setCartProducts] = useState({});
 
   const fetchCartProducts = async (id) => {
     return fetch(`https://dummyjson.com/carts/${id}`)
