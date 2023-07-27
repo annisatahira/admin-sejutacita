@@ -1,10 +1,7 @@
 "use client";
 
-// import BarChart from "@/components/charts/bar";
 import { useProducts } from "@/data/products/useProducts";
-// import { getKeyData } from "@/utils";
-// import { useEffect, useState } from "react";
-import ConnectedChart from "@/components/charts/ConnectedChart";
+import ConnectedChart from "@/components/charts/connectedChart";
 import Loading from "@/components/loading";
 
 export default function Dashboard() {
