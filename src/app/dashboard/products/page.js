@@ -1,14 +1,11 @@
-
-
-
-import ProductTable from "@/components/table/productTable";
+import { ProductTable } from "@/components/table/index";
 
 const Products = () => {
-    return (
-        <div className="">
-            <ProductTable />
-        </div>
-    )
-}
+  return (
+    <div className="">
+      <ProductTable />
+    </div>
+  );
+};
 
 export default Products;

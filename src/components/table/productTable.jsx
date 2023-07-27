@@ -6,7 +6,7 @@ import Select from "../dropdown/select";
 import { useContext, useEffect, useState } from "react";
 import ProductContext from "@/context/productContext";
 
-const ProductTable = () => {
+export const ProductTable = () => {
   const ProductColumns = [
     {
       header: "ID",
@@ -62,6 +62,7 @@ const ProductTable = () => {
       fetchSearch={searchProduct}
       searchBy={"title"}
       fetchAll={fetchData}
+      showFilter={true}
       filters={
         <>
           <Select
@@ -87,5 +88,3 @@ const ProductTable = () => {
     />
   );
 };
-
-export default ProductTable;

@@ -6,13 +6,14 @@ import {
   getCoreRowModel,
   getPaginationRowModel,
 } from "@tanstack/react-table";
-import SearchBar from "./searchBar";
+import SearchBar from "../search";
 
 const DataTable = (props) => {
   const {
     columns,
-    data,
+    data = [],
     showSearchBar = false,
+    showFilter = false,
     fetchSearch,
     searchBy,
     fetchAll,
@@ -28,7 +29,7 @@ const DataTable = (props) => {
   });
 
   return (
-    <div className="m-6 relative overflow-x-auto">
+    <div className="relative overflow-x-auto">
       {showSearchBar && (
         <div className="w-1/3 relative mx-1">
           <h1 className="mb-3">Search Product</h1>
@@ -40,10 +41,12 @@ const DataTable = (props) => {
           />
         </div>
       )}
-      <div className="mb-4 mx-1">
-        <h1 className="mb-3">Filter</h1>
-        <div className="grid grid-cols-4 gap-3">{filters}</div>
-      </div>
+      {showFilter && (
+        <div className="mb-4 mx-1">
+          <h1 className="mb-3">Filter</h1>
+          <div className="grid grid-cols-4 gap-3">{filters}</div>
+        </div>
+      )}
       <div className="shadow-lg m-1 rounded-md">
         <div>
           {data?.length > 0 ? (
