@@ -1,6 +1,7 @@
 "use client";
 
 import Button from "@/components/button";
+import Loading from "@/components/loading";
 import { CartProductTable } from "@/components/table";
 import { useCartProducts } from "@/data/carts/useCartProducts";
 import { useDetailUser } from "@/data/users/useDetailUser";
@@ -13,7 +14,7 @@ const CartDetail = () => {
   const param = useParams();
   const router = useRouter();
 
-  const { cartProducts, fetchCartProducts } = useCartProducts();
+  const { cartProducts, fetchCartProducts, loading } = useCartProducts();
   const { user, fetchUser } = useDetailUser();
 
   useEffect(() => {
@@ -22,7 +23,6 @@ const CartDetail = () => {
 
   useEffect(() => {
     if (Object.keys(cartProducts).length > 0) {
-      console.log({ cartProducts });
       fetchUser(cartProducts?.userId);
     }
   }, [cartProducts]);
@@ -35,18 +35,22 @@ const CartDetail = () => {
         onClick={() => router.push("/dashboard/carts")}
       />
       <div className="w-full my-3 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        <ul className="grid grid-cols-2 leading-10 mb-3">
-          <li>Username : {user?.username}</li>
-          <li>
-            {cartProducts?.totalProducts} of item {cartProducts?.totalQuantity}
-          </li>
-          <li>
-            Fullname : {user?.firstName} {user?.lastName}
-          </li>
-          <li>Total Amount : {cartProducts?.total}</li>
-        </ul>
+        {!loading ? (
+          <ul className="grid grid-cols-2 leading-10 mb-3">
+            <li>Username : {user?.username}</li>
+            <li>
+              {cartProducts?.totalProducts} of item{" "}
+              {cartProducts?.totalQuantity}
+            </li>
+            <li>
+              Fullname : {user?.firstName} {user?.lastName}
+            </li>
+            <li>Total Amount : {cartProducts?.total}</li>
+          </ul>
+        ) : (
+          <Loading />
+        )}
       </div>
-
       <CartProductTable />
     </div>
   );

@@ -31,7 +31,7 @@ export const CartProductTable = () => {
 
   const param = useParams();
 
-  const { cartProducts, fetchCartProducts } = useCartProducts();
+  const { cartProducts, fetchCartProducts, loading } = useCartProducts();
 
   useEffect(() => {
     fetchCartProducts(param.id);
@@ -43,6 +43,7 @@ export const CartProductTable = () => {
       columns={CartProductsColumn}
       data={cartProducts?.products}
       fetchAll={fetchCartProducts}
+      loading={loading}
     />
   );
 };

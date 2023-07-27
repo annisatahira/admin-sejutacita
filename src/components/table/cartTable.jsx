@@ -26,7 +26,7 @@ export const CartTable = () => {
     },
   ];
 
-  const { carts, fetchCarts } = useCarts();
+  const { carts, fetchCarts, loading } = useCarts();
 
   return (
     <DataTable
@@ -35,6 +35,7 @@ export const CartTable = () => {
       data={carts}
       fetchAll={fetchCarts}
       showAction={true}
+      loading={loading}
     />
   );
 };

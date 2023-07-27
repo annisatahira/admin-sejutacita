@@ -4,6 +4,7 @@ import { CategoryScale } from "chart.js";
 import { getKeyData } from "@/utils";
 import { useEffect, useState } from "react";
 import BarChart from "./bar";
+import Loading from "../loading";
 
 Chart.register(CategoryScale);
 
@@ -50,7 +51,6 @@ const ConnectedChart = (props) => {
     };
   };
 
-  console.log({ products });
   return (
     <div>
       {Object.keys(products).length > 0 ? (
@@ -58,7 +58,7 @@ const ConnectedChart = (props) => {
           <BarChart chartData={products} />
         </div>
       ) : (
-        <h1>Loading..</h1>
+        <Loading />
       )}
     </div>
   );

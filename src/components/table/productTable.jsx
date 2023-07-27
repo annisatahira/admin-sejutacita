@@ -40,7 +40,7 @@ export const ProductTable = () => {
     },
   ];
 
-  const { allData, fetchData } = useProducts();
+  const { loading, allData, fetchData } = useProducts();
   const [products, setProducts] = useContext(ProductContext);
   const [filters, setFilters] = useState({});
 
@@ -63,6 +63,7 @@ export const ProductTable = () => {
       searchBy={"title"}
       fetchAll={fetchData}
       showFilter={true}
+      loading={loading}
       filters={
         <>
           <Select

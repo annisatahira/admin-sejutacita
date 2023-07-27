@@ -6,6 +6,7 @@ import { filterArrByObj } from "@/utils";
 
 export const useProducts = () => {
   const [allData, setAllData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const [products, setProducts] = useContext(ProductContext);
 
@@ -15,10 +16,12 @@ export const useProducts = () => {
       .then((data) => {
         setProducts(data.products);
         setAllData(data.products);
+        setLoading(false);
 
         return data.products;
       })
       .catch((err) => {
+        setLoading(false);
         return err;
       });
   };
@@ -41,5 +44,7 @@ export const useProducts = () => {
     fetchData();
   }, []);
 
-  return { products, allData, fetchProducts, fetchData };
+  console.log({ products });
+
+  return { loading, products, allData, fetchProducts, fetchData };
 };
