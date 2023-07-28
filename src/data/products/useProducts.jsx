@@ -2,7 +2,7 @@
 
 import ProductContext from "@/context/productContext";
 import { useContext, useEffect, useState } from "react";
-import { filterArrByObj } from "@/utils";
+import { filterArrByObj, filterMinMax } from "@/utils";
 
 export const useProducts = () => {
   const [allData, setAllData] = useState([]);
@@ -26,15 +26,34 @@ export const useProducts = () => {
       });
   };
 
-  const fetchData = () => {
+  const fetchData = async () => {
     const filters = JSON.parse(sessionStorage.getItem("product-filter"));
 
     if (filters && Object.keys(filters).length !== 0) {
-      fetchProducts().then((data) => {
-        const filteredProduct = filterArrByObj(data, filters);
+      let filteredProducts = [];
 
-        setProducts(filteredProduct);
-      });
+      const products = await fetchProducts();
+      filteredProducts = products;
+
+      // for brand, category, product
+      if (filters?.filter) {
+        const filterData = await filterArrByObj(products, filters?.filter);
+        filteredProducts = filterData;
+      }
+
+      // for min max
+      if (filters?.range) {
+        const filteredProductWIthRange = filterMinMax({
+          data: filteredProducts,
+          filterBy: "stock",
+          minValue: parseInt(filters?.range?.minValue),
+          maxValue: parseInt(filters?.range?.maxValue),
+        });
+
+        filteredProducts = filteredProductWIthRange;
+      }
+
+      setProducts(filteredProducts);
     } else {
       fetchProducts();
     }
@@ -43,6 +62,8 @@ export const useProducts = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  console.log({ products });
 
   return { loading, products, allData, fetchProducts, fetchData };
 };

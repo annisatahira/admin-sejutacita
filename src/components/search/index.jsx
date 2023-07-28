@@ -9,8 +9,19 @@ const SearchBar = (props) => {
     e.preventDefault();
 
     // autosaved
-    const data = { title: inputText };
-    sessionStorage.setItem(`${id}-filter`, JSON.stringify(data));
+    const data = {
+      filter: { title: inputText },
+    };
+    const filters = sessionStorage.getItem(`${id}-filter`);
+
+    if (filters) {
+      const filterJson = JSON.parse(filters);
+      filterJson["filter"][searchBy] = inputText;
+      sessionStorage.setItem(`${id}-filter`, JSON.stringify(filterJson));
+    } else {
+      sessionStorage.setItem(`${id}-filter`, JSON.stringify(data));
+    }
+
     // fetch data by given key
     fetchSearch(inputText);
   };
@@ -18,10 +29,9 @@ const SearchBar = (props) => {
   useEffect(() => {
     const key = sessionStorage.getItem(`${id}-filter`);
 
-    if (key && key[searchBy] !== "") {
-      JSON.parse(key);
-      setInputText(key[searchBy]);
-      fetchSearch(key[searchBy]);
+    if (key && key["filter"]) {
+      setInputText(JSON.parse(key)["filter"][searchBy]);
+      fetchSearch(JSON.parse(key)["filter"][searchBy]);
     }
   }, []);
 
@@ -32,7 +42,7 @@ const SearchBar = (props) => {
       if (filter) {
         const objFilter = JSON.parse(filter);
 
-        delete objFilter[searchBy];
+        delete objFilter["filter"][searchBy];
         sessionStorage.setItem(`${id}-filter`, JSON.stringify(objFilter));
 
         fetchAll();

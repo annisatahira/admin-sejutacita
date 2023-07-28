@@ -2,9 +2,10 @@
 import DataTable from "@/components/table/dataTable";
 import { useProducts } from "@/data/products/useProducts";
 import { useSearchProduct } from "@/data/products/useSearchProduct";
-import Select from "../dropdown/select";
+import Select from "../filter/select";
 import { useContext, useEffect, useState } from "react";
 import ProductContext from "@/context/productContext";
+import MinMax from "../filter/minMax";
 
 export const ProductTable = () => {
   const ProductColumns = [
@@ -74,7 +75,7 @@ export const ProductTable = () => {
             dataTable={products}
             setDataTable={setProducts}
             filterBy="brand"
-            initialValue={{ label: filters?.brand }}
+            initialValue={{ label: filters?.filter?.brand }}
           />
           <Select
             id="react-select-category"
@@ -83,7 +84,14 @@ export const ProductTable = () => {
             dataTable={products}
             setDataTable={setProducts}
             filterBy="category"
-            initialValue={{ label: filters?.category }}
+            initialValue={{ label: filters?.filter?.category }}
+          />
+          <MinMax
+            id="product"
+            filterBy="stock"
+            dataTable={products}
+            setDataTable={setProducts}
+            allData={allData}
           />
         </>
       }

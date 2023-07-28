@@ -7,15 +7,7 @@ import { filterArrByObj, getKeyData, objToArray } from "@/utils";
 // options ---> keseluruhan data awal
 
 const Select = (props) => {
-  const {
-    id,
-    title,
-    dataTable,
-    setDataTable,
-    options,
-    filterBy,
-    initialValue,
-  } = props;
+  const { id, title, setDataTable, options, filterBy, initialValue } = props;
   const [optionSelected, setOptionSelected] = useState(null);
   const [optionData, setOptionData] = useState([]);
 
@@ -26,7 +18,7 @@ const Select = (props) => {
     const conditions = getFillteredKey(selected);
 
     // filter data by selected filter
-    const dataFiltered = filterArrByObj(options, conditions);
+    const dataFiltered = filterArrByObj(options, conditions?.filter);
 
     setDataTable(dataFiltered);
   };
@@ -37,19 +29,29 @@ const Select = (props) => {
     if (allFilter && allFilter !== null && allFilter !== "") {
       const objFilter = JSON.parse(allFilter);
 
+      const newFilter = {
+        [filterBy]: selected?.label,
+      };
+
       if (selected == null) {
-        delete objFilter[filterBy];
+        delete objFilter["filter"][filterBy];
       } else {
-        objFilter[filterBy] = selected?.label;
+        if (objFilter["filter"]) {
+          objFilter["filter"][filterBy] = selected?.label;
+        } else {
+          objFilter["filter"] = newFilter;
+        }
       }
 
       sessionStorage.setItem("product-filter", JSON.stringify(objFilter));
 
       return objFilter;
     } else {
-      const savedFilter = {};
+      const savedFilter = {
+        filter: {},
+      };
 
-      savedFilter[filterBy] = selected?.label;
+      savedFilter["filter"][filterBy] = selected?.label;
       sessionStorage.setItem("product-filter", JSON.stringify(savedFilter));
 
       return savedFilter;
