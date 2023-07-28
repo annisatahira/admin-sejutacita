@@ -23,8 +23,21 @@ const Select = (props) => {
     // get selected filter
     const conditions = getFillteredKey(selected);
 
+    // check if there is filter price
+    const filter = sessionStorage.getItem("product-filter");
+    let filterRange = false;
+    if (filter) {
+      const filterJson = JSON.parse(filter);
+
+      if (filterJson["range"]) {
+        filterRange = true;
+      }
+    }
+
+    const dataTableFIlter = filterRange ? dataTable : options;
+
     // filter data by selected filter
-    const data = selected === null ? options : dataTable;
+    const data = selected == null ? options : dataTableFIlter;
     const dataFiltered = filterArrByObj(data, conditions?.filter);
 
     setDataTable(dataFiltered);
