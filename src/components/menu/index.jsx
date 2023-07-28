@@ -42,13 +42,7 @@ const Menu = () => {
   return (
     <div className="fixed md:relative bg-white w-full z-10 m-0 py-4">
       <div className="flex justify-between items-center px-4">
-        <Image
-          src="/logo.png"
-          width={200}
-          height={300}
-          alt="Picture of the author"
-        />
-        {/* <h1 className="font-bold text-3xl text-blue-600">SejutaCita</h1> */}
+        <Image src="/logo.png" width={200} height={50} alt="Ccommerce" />
         <button
           className="text-gray-500 rounded-full p-2 md:hidden hover:bg-blue-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-gray-200"
           onClick={handleToggleMenu}
