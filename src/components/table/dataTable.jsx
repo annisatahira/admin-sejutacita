@@ -56,7 +56,7 @@ const DataTable = (props) => {
             <h1 className="text-xl font-bold">Filter</h1>
           </div>
           <hr className="my-3" />
-          <div className="grid md:grid-cols-4 gap-3">{filters}</div>
+          <div className="grid md:grid-cols-3 gap-3">{filters}</div>
         </div>
       )}
       <div className="shadow-lg m-1 rounded-md">
