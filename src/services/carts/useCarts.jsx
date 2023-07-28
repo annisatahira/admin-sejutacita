@@ -10,10 +10,10 @@ export const useCarts = () => {
     return fetch("https://dummyjson.com/carts")
       .then((res) => res.json())
       .then((data) => {
-        setCarts(data.carts);
+        setCarts(data?.carts);
         setLoading(false);
 
-        return data.carts;
+        return data?.carts;
       })
       .catch((err) => {
         setLoading(false);
