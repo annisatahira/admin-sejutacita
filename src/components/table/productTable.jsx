@@ -88,7 +88,7 @@ export const ProductTable = () => {
           />
           <MinMax
             id="product"
-            filterBy="stock"
+            filterBy="price"
             dataTable={products}
             setDataTable={setProducts}
             allData={allData}

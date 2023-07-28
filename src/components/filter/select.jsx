@@ -3,9 +3,6 @@ import { default as ReactSelect } from "react-select";
 import Option from "./options";
 import { filterArrByObj, getKeyData, objToArray } from "@/utils";
 
-// dataTable --> data yg berubah hasil search dan filter
-// options ---> keseluruhan data awal
-
 const Select = (props) => {
   const { id, title, setDataTable, options, filterBy, initialValue } = props;
   const [optionSelected, setOptionSelected] = useState(null);
@@ -71,7 +68,7 @@ const Select = (props) => {
   }, [options]);
 
   return (
-    <div>
+    <div className="border rounded-md p-3">
       <h1 className="mb-2 font-medium">By {title}</h1>
       <ReactSelect
         id={id}

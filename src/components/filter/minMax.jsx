@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Button from "../button";
 import { filterMinMax } from "@/utils";
+import Input from "../input";
 
 const MinMax = (props) => {
   const { id, dataTable, setDataTable, allData, filterBy } = props;
@@ -62,17 +63,14 @@ const MinMax = (props) => {
   };
 
   return (
-    <form id={id} onSubmit={handleSubmit} className="flex items-center gap-3">
+    <form
+      id={id}
+      onSubmit={handleSubmit}
+      className="flex items-center gap-3 mt-1 border rounded-md p-3"
+    >
       <div className="mb-4">
-        <label
-          className="block text-gray-700 text-sm font-bold mb-2"
-          htmlFor="min-price"
-        >
-          Min
-        </label>
-        <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="min-price"
+        <Input
+          label="Price Min"
           type="number"
           min={0}
           value={minValue || ""}
@@ -81,22 +79,15 @@ const MinMax = (props) => {
         />
       </div>
       <div className="mb-4">
-        <label
-          className="block text-gray-700 text-sm font-bold mb-2"
-          htmlFor="max-price"
-        >
-          Max
-        </label>
-        <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="max-price"
+        <Input
+          label="Price Max"
           type="number"
           value={maxValue || ""}
           onChange={(e) => setMaxValue(e.target.value)}
           placeholder="10000"
         />
       </div>
-      <Button type="submit" title="OK" />
+      <Button type="submit" title="Apply" />
     </form>
   );
 };
