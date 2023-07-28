@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Button from "../button";
-import { filterMinMax } from "@/utils";
+import { checkFilter, filterMinMax } from "@/utils";
 import Input from "../input";
 
 const MinMax = (props) => {
@@ -11,7 +11,8 @@ const MinMax = (props) => {
 
   useEffect(() => {
     if (minValue === "" && maxValue === "") {
-      setDataTable(allData);
+      const currentData = checkFilter(allData);
+      setDataTable(currentData);
     }
   }, [minValue, maxValue]);
 
@@ -33,10 +34,24 @@ const MinMax = (props) => {
 
     // autosaved
     const range = {
-      minValue,
-      maxValue,
+      minValue: minValue ? parseInt(minValue) : "",
+      maxValue: maxValue ? parseInt(maxValue) : "",
     };
 
+    handleAutoSave(range);
+
+    // filter data
+    const filteredData = filterMinMax({
+      data: dataTable,
+      filterBy,
+      minValue: minValue ? parseInt(minValue) : "",
+      maxValue: maxValue ? parseInt(maxValue) : "",
+    });
+
+    setDataTable(filteredData);
+  };
+
+  const handleAutoSave = (range) => {
     // get current filter
     const filters = sessionStorage.getItem(`product-filter`);
 
@@ -50,24 +65,22 @@ const MinMax = (props) => {
     } else {
       sessionStorage.setItem(`product-filter`, JSON.stringify({ range }));
     }
+  };
 
-    // filter data
-    const filteredData = filterMinMax({
-      data: dataTable,
-      filterBy,
-      minValue,
-      maxValue,
-    });
+  const handleReset = () => {
+    const range = {
+      minValue: "",
+      maxValue: "",
+    };
 
-    setDataTable(filteredData);
+    handleAutoSave(range);
+
+    setMinValue("");
+    setMaxValue("");
   };
 
   return (
-    <form
-      id={id}
-      onSubmit={handleSubmit}
-      className="flex items-center gap-3 mt-1 border rounded-md p-3"
-    >
+    <div id={id} className="flex items-center gap-3 mt-1 border rounded-md p-3">
       <div className="mb-4">
         <Input
           label="Price Min"
@@ -87,8 +100,11 @@ const MinMax = (props) => {
           placeholder="10000"
         />
       </div>
-      <Button type="submit" title="Apply" />
-    </form>
+      <div>
+        <Button type="submit" title="Apply" onClick={handleSubmit} />
+        <Button type="submit" title="Reset" onClick={handleReset} />
+      </div>
+    </div>
   );
 };
 

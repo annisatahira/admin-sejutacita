@@ -4,18 +4,28 @@ import Option from "./options";
 import { filterArrByObj, getKeyData, objToArray } from "@/utils";
 
 const Select = (props) => {
-  const { id, title, setDataTable, options, filterBy, initialValue } = props;
+  const {
+    id,
+    title,
+    dataTable,
+    setDataTable,
+    options,
+    filterBy,
+    initialValue,
+  } = props;
   const [optionSelected, setOptionSelected] = useState(null);
   const [optionData, setOptionData] = useState([]);
 
   const handleChange = (selected) => {
+    console.log("change", selected);
     setOptionSelected(selected);
 
     // get selected filter
     const conditions = getFillteredKey(selected);
 
     // filter data by selected filter
-    const dataFiltered = filterArrByObj(options, conditions?.filter);
+    const data = selected === null ? options : dataTable;
+    const dataFiltered = filterArrByObj(data, conditions?.filter);
 
     setDataTable(dataFiltered);
   };
