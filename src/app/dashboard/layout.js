@@ -12,7 +12,7 @@ export default function DashboardLayout({ children }) {
           <PiHandWavingDuotone className="text-4xl" />
           <h1>Welcome Back, Admin!</h1>
         </div>
-        <div className="p-6">{children}</div>
+        <div className="px-6 pb-6 pt-3 overflow-x-hidden">{children}</div>
       </main>
     </div>
   );

@@ -26,6 +26,7 @@ const DataTable = (props) => {
     filters,
     showAction = false,
     loading,
+    placeholderSearch,
   } = props;
 
   const table = useReactTable({
@@ -36,14 +37,15 @@ const DataTable = (props) => {
   });
 
   return (
-    <div className="relative overflow-x-auto">
+    <div className="relative">
       {showSearchBar && (
-        <div className="w-1/3 relative mx-1">
+        <div className="w-full md:w-1/3 relative md:mx-1">
           <SearchBar
             id={id}
             fetchAll={fetchAll}
             fetchSearch={fetchSearch}
             searchBy={searchBy}
+            placeholder={placeholderSearch}
           />
         </div>
       )}
@@ -54,11 +56,11 @@ const DataTable = (props) => {
             <h1 className="text-xl font-bold">Filter</h1>
           </div>
           <hr className="my-3" />
-          <div className="grid grid-cols-4 gap-3">{filters}</div>
+          <div className="grid md:grid-cols-4 gap-3">{filters}</div>
         </div>
       )}
       <div className="shadow-lg m-1 rounded-md">
-        <div>
+        <div className="overflow-x-auto">
           {!loading ? (
             <>
               {data?.length > 0 ? (
@@ -112,27 +114,6 @@ const DataTable = (props) => {
                       ))}
                     </tbody>
                   </table>
-                  <div className="bg-white flex p-4 gap-2 justify-end">
-                    <button
-                      className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-                      disabled={!table.getCanPreviousPage()}
-                      onClick={() => table.previousPage()}
-                    >
-                      Prev
-                    </button>
-                    <div className="flex justify-center items-center text-sm gap-1">
-                      <div>{table.getState().pagination.pageIndex + 1}</div>
-                      <div>/</div>
-                      <div>{table.getPageCount()}</div>
-                    </div>
-                    <button
-                      className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-                      disabled={!table.getCanNextPage()}
-                      onClick={() => table.nextPage()}
-                    >
-                      Next
-                    </button>
-                  </div>
                 </>
               ) : (
                 <NotFoundData />
@@ -141,6 +122,27 @@ const DataTable = (props) => {
           ) : (
             <Loading />
           )}
+        </div>
+        <div className="bg-white flex p-4 gap-2 justify-end">
+          <button
+            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+            disabled={!table.getCanPreviousPage()}
+            onClick={() => table.previousPage()}
+          >
+            Prev
+          </button>
+          <div className="flex justify-center items-center text-sm gap-1">
+            <div>{table.getState().pagination.pageIndex + 1}</div>
+            <div>/</div>
+            <div>{table.getPageCount()}</div>
+          </div>
+          <button
+            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+            disabled={!table.getCanNextPage()}
+            onClick={() => table.nextPage()}
+          >
+            Next
+          </button>
         </div>
       </div>
     </div>

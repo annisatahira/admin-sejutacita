@@ -61,6 +61,7 @@ export const ProductTable = () => {
       showSearchBar={true}
       fetchSearch={searchProduct}
       searchBy={"title"}
+      placeholderSearch={"Iphone X"}
       fetchAll={fetchData}
       showFilter={true}
       loading={loading}
