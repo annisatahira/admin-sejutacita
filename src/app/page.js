@@ -8,7 +8,7 @@ export default function Home() {
           Hello!
           <br />
         </h1>
-        <h2 className="mb-16 text-5xl leading-normal">
+        <h2 className="mb-16 text-lg md:text-5xl leading-normal">
           Have a great day ahead! May each moment be filled with positivity,
           productivity, and joy.
         </h2>
