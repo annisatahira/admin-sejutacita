@@ -30,7 +30,10 @@ const Select = (props) => {
       const filterJson = JSON.parse(filter);
 
       if (filterJson["range"]) {
-        if (filterJson?.range?.min == "" && filterJson?.range?.min == "") {
+        if (
+          filterJson?.range?.minValue == "" &&
+          filterJson?.range?.maxValue == ""
+        ) {
           filterRange = false;
         } else {
           filterRange = true;
@@ -43,7 +46,7 @@ const Select = (props) => {
     const dataTableFIlter = filterRange ? dataTable : options;
 
     // filter data by selected filter
-    const data = selected == null ? options : options;
+    const data = selected == null ? options : dataTableFIlter;
     const dataFiltered = filterArrByObj(data, conditions?.filter);
 
     setDataTable(dataFiltered);
