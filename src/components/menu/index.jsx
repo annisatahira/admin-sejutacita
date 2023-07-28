@@ -5,6 +5,9 @@ import { usePathname } from "next/navigation";
 import { BsBoxes } from "react-icons/bs";
 import { FaCartShopping } from "react-icons/fa6";
 import { BiSolidDashboard } from "react-icons/bi";
+import { HiMenu } from "react-icons/hi";
+import { useState } from "react";
+import MenuItem from "./menuItem";
 
 const MENU_DASHBOARD = [
   {
@@ -29,39 +32,32 @@ const MENU_DASHBOARD = [
 
 const Menu = () => {
   const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleToggleMenu = () => {
+    isOpen ? setIsOpen(false) : setIsOpen(true);
+  };
 
   return (
-    <>
-      <h1 className="font-bold mb-4 text-3xl text-blue-600">SejutaCita</h1>
-      <hr className="h-px my-8 bg-blue-200 border-0"></hr>
-      <nav className=" text-gray-400 cursor-pointer mt-10">
-        <ul className="list-none leading-10 w-full">
-          {MENU_DASHBOARD.map((menu) => {
-            let isActive = false;
+    <div className="fixed md:relative bg-white w-full z-10 m-0 py-4">
+      <div className="flex justify-between items-center px-4">
+        <h1 className="font-bold text-3xl text-blue-600">SejutaCita</h1>
+        <button
+          className="text-gray-500 rounded-full p-2 md:hidden hover:bg-blue-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-gray-200"
+          onClick={handleToggleMenu}
+        >
+          <HiMenu className="text-3xl" />
+        </button>
+      </div>
 
-            menu.id === 1
-              ? (isActive = pathname === menu.href)
-              : (isActive = pathname.startsWith(menu.href));
+      {/* Mobile */}
+      {isOpen && <MenuItem list={MENU_DASHBOARD} pathname={pathname} />}
 
-            return (
-              <li
-                className={`flex gap-2 py-2 pl-2 pr-4 mb-3 items-center rounded-full min-w-full
-                ${
-                  isActive &&
-                  "font-bold bg-blue-500 shadow-md text-white hover:bg-blue-500 hover:text-white"
-                }`}
-                key={menu.id}
-              >
-                <div className="rounded-full w-50 h-50 p-3">{menu.icon}</div>
-                <Link className="flex w-full" href={menu.href}>
-                  {menu.title}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
-    </>
+      {/* Desktop */}
+      <div className="hidden md:block">
+        <MenuItem list={MENU_DASHBOARD} pathname={pathname} />
+      </div>
+    </div>
   );
 };
 
