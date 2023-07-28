@@ -45,7 +45,7 @@ export const useProducts = () => {
       if (filters?.range) {
         const filteredProductWIthRange = filterMinMax({
           data: filteredProducts,
-          filterBy: "stock",
+          filterBy: "price",
           minValue: parseInt(filters?.range?.minValue),
           maxValue: parseInt(filters?.range?.maxValue),
         });
