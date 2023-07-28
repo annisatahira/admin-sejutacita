@@ -1,34 +1,62 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# CCommerce
 
-## Getting Started
+This project was build using NextJs for SEJUTA CITA technical test purpose
 
-First, run the development server:
+## Run App
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+In the project directory, you can run:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### `npm install`
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Install depedencies of this project
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### `npm start`
 
-## Learn More
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-To learn more about Next.js, take a look at the following resources:
+The page will reload when you make changes.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## App Feature
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Show Product List
+- Search Product by Name
+- FIlter Product by Brand, Category, Price Range
+- Show Cart List
+- Show Cart Detail
+- Show products by category chart
+- Autosaved search and filters product
 
-## Deploy on Vercel
+## Frontend Stack
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- NextJS
+- React Context
+- REST API
+- Tailwindcss
+- React-select
+- Tanstack Table
+- React Icons
+- Mobile First Approach
+- Web Storage API - Session Storage
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Project Structure
+
+| Directory      | Description                                                                                        |
+| -------------- | -------------------------------------------------------------------------------------------------- |
+| public         | contains static files such as index html, javascript library files, images, and other assets, etc. |
+| src/components | contains reusable components                                                                       |
+| src/context    | contains React's context that allows you to share data to any component                            |
+| src/app        | contains a page on the application                                                                 |
+| src/routes     | contains navigations between different page of application                                         |
+| src/services   | contains files to connect with third parties (using Hooks)                                         |
+| src/utils      | contains file like reusable function, storage etc                                                  |
+
+## Deployment App
+
+https://admin-sejutacita.vercel.app/
+
+### Note
+
+The app a little bit different from the provided wireframe.
+That's because some requirements make me a little confused.
+I tried contacting the PIC, but the provided email is invalid. So I'm really sorry if the result is a little bit different from the given requirements
