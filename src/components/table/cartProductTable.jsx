@@ -1,7 +1,7 @@
 "use client";
 import DataTable from "@/components/table/dataTable";
-import { useCartProducts } from "@/data/carts/useCartProducts";
-import { useCarts } from "@/data/carts/useCarts";
+import { useCartProducts } from "@/services/carts/useCartProducts";
+import { useCarts } from "@/services/carts/useCarts";
 import { useParams } from "next/navigation";
 import { useEffect } from "react";
 

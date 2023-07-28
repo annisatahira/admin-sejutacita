@@ -3,8 +3,8 @@
 import Button from "@/components/button";
 import Loading from "@/components/loading";
 import { CartProductTable } from "@/components/table";
-import { useCartProducts } from "@/data/carts/useCartProducts";
-import { useDetailUser } from "@/data/users/useDetailUser";
+import { useCartProducts } from "@/services/carts/useCartProducts";
+import { useDetailUser } from "@/services/users/useDetailUser";
 import { useParams, useRouter } from "next/navigation";
 
 import { useEffect } from "react";

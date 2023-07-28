@@ -1,7 +1,7 @@
 "use client";
 import DataTable from "@/components/table/dataTable";
-import { useProducts } from "@/data/products/useProducts";
-import { useSearchProduct } from "@/data/products/useSearchProduct";
+import { useProducts } from "@/services/products/useProducts";
+import { useSearchProduct } from "@/services/products/useSearchProduct";
 import Select from "../filter/select";
 import { useContext, useEffect, useState } from "react";
 import ProductContext from "@/context/productContext";

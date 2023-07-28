@@ -1,6 +1,6 @@
 "use client";
 
-import { useProducts } from "@/data/products/useProducts";
+import { useProducts } from "@/services/products/useProducts";
 import ConnectedChart from "@/components/charts/connectedChart";
 import Loading from "@/components/loading";
 

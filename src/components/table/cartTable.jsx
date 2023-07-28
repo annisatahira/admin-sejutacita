@@ -1,6 +1,6 @@
 "use client";
 import DataTable from "@/components/table/dataTable";
-import { useCarts } from "@/data/carts/useCarts";
+import { useCarts } from "@/services/carts/useCarts";
 
 export const CartTable = () => {
   const CartColumns = [
